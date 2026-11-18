@@ -47,8 +47,6 @@ def Test(model, test_DL):
       y_hat = model(x_batch)
 
       pred = y_hat.argmax(dim=1)
-      print(y_hat.shape)
-      print(pred)
 
       corrects_b = torch.sum(pred == y_batch).item()
       rcorrect += corrects_b
