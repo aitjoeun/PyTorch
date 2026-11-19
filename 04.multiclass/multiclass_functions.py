@@ -101,7 +101,7 @@ def get_conf(model, test_DL):
 # 혼동행렬 그래프
 def plot_confusion_matrix(confusion, classes=None):
   N = confusion.shape[0]
-  accuracy = confusion / np.sum(confusion) * 100
+  accuracy = np.trace(confusion) / np.sum(confusion) * 100
 
   plt.figure(figsize=(10, 7))
   plt.imshow(confusion, cmap="Blues")
@@ -110,14 +110,14 @@ def plot_confusion_matrix(confusion, classes=None):
 
   for i in range(N) :
     for j in range(N):
-        plt.text(j, i, confusion[i,j], ha='center', va='center',
+        plt.text(j, i, int(confusion[i,j]), ha='center', va='center',
                 color='white' 
                 if confusion[i,j] > confusion.max() / 1.5 
                 else 'black'
                 )
   if classes is not None:
     plt.xticks(range(N), classes)
-    plt.xticks(range(N), classes)    
+    plt.yticks(range(N), classes)    
   else:
     plt.xticks(range(N))
     plt.yticks(range(N))
